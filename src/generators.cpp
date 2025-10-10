@@ -350,12 +350,20 @@ void Generator::AppendTokens(cpu_span<const int32_t> input_ids) {
     set_extra_inputs_ = false;
   }
 
+  DeviceSpan<int32_t> input_ids_device;
   if (last_action_ == Action::generated) {
-    ComputeLogits(search_->GetNextTokens());
-  }
+    auto next_tokens = search_->GetNextTokens().CopyDeviceToCpu();
+    std::vector<int32_t> next_input_ids(next_tokens.size() + input_ids.size());
+    std::copy(next_tokens.begin(), next_tokens.end(), next_input_ids.begin());
+    std::copy(input_ids.begin(), input_ids.end(), next_input_ids.begin() + next_tokens.size());
 
-  auto input_ids_device = AllocateInputIdsOnDevice(input_ids);
-  search_->AppendTokens(input_ids_device);
+    input_ids_device = AllocateInputIdsOnDevice(next_input_ids);
+    auto input_ids_device_span = input_ids_device.subspan(next_tokens.size(), input_ids_device.size() - next_tokens.size());
+    search_->AppendTokens(input_ids_device_span);
+  } else {
+    input_ids_device = AllocateInputIdsOnDevice(input_ids);
+    search_->AppendTokens(input_ids_device);
+  }
   computed_logits_ = false;
   ComputeLogits(input_ids_device);
 }
