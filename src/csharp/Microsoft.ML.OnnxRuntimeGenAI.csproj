@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <CheckEolWorkloads>false</CheckEolWorkloads>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TargetFrameworks>$(BaseTargets);$(MobileTargets)</TargetFrameworks>
     <Platforms>AnyCPU</Platforms>
     <LangVersion>latest</LangVersion>
