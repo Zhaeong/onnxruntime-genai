@@ -5,7 +5,7 @@ option(USE_CUDA "Build with CUDA support" ON)
 option(USE_TRT_RTX "Build with TensorRT-RTX support" OFF)
 option(USE_ROCM "Build with ROCm support" ON)
 option(USE_DML "Build with DML support" OFF)
-option(USE_WINML "Build with WinML support" OFF)
+option(USE_WINML "Build with WinML support" ON)
 option(USE_GUIDANCE "Build with guidance support" OFF)
 
 # bindings

@@ -292,7 +292,6 @@
       "name": "windows_x64_winml_relwithdebinfo",
       "inherits": [
         "windows_relwithdebinfo_default",
-        "windows_cuda_default",
         "windows_directml_default"
       ],
       "displayName": "windows x64 winml relwithdebinfo",

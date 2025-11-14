@@ -5,6 +5,7 @@ if(USE_WINML)
   message(STATUS "----- Building with WinML support ----- ")
 
   add_compile_definitions(USE_WINML=1)
+  set(WINML_SDK_VERSION "1.8.2095")
 
   if(NOT DEFINED WINML_SDK_VERSION OR WINML_SDK_VERSION STREQUAL "")
     #set(WINML_SDK_VERSION "1.8.1065-experimental")

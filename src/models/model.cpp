@@ -717,6 +717,7 @@ DeviceInterface* SetProviderSessionOptions(OrtSessionOptions& session_options,
           {"WebGPU", "WebGpuExecutionProvider"},
           {"OpenVINO", "OpenVINOExecutionProvider"},
           {"VitisAI", "VitisAIExecutionProvider"},
+          {"MIGraphX", "MIGraphXExecutionProvider"},
           {"NvTensorRtRtx", "NvTensorRTRTXExecutionProvider"},
       };
       std::string ep_name{};
