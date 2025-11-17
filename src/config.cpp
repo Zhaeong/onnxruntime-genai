@@ -28,6 +28,8 @@ std::string_view NormalizeProviderName(std::string_view name) {
     return "VitisAI";
   } else if (lower_name == "nvtensorrtrtx") {
     return "NvTensorRtRtx";
+  } else if (lower_name == "migraphx") {
+    return "MIGraphX";
   }
   return name;  // Return name unchanged
 }
@@ -1086,7 +1088,10 @@ bool IsGraphCaptureEnabled(const Config::SessionOptions& session_options) {
         }
       } else if (provider_options->name == "DML") {
         return true;
-      } else if (provider_options->name == "NvTensorRtRtx") {
+      } else if (provider_options->name == "MIGraphX") {
+        return true;
+      }
+      else if (provider_options->name == "NvTensorRtRtx") {
         for (const auto& value : provider_options->options) {
           if (value.first == "enable_cuda_graph" && value.second == "1") {
             return true;
