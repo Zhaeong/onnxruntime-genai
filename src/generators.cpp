@@ -366,6 +366,7 @@ void Generator::AppendTokens(cpu_span<const int32_t> input_ids) {
   auto input_ids_device = AllocateInputIdsOnDevice(input_ids);
   search_->AppendTokens(input_ids_device);
   computed_logits_ = false;
+  state_->prompt_gen_ = true;
   ComputeLogits(input_ids_device);
 }
 
@@ -495,6 +496,8 @@ void Generator::GenerateNextToken() {
     auto next_tokens = search_->GetNextTokens();
     if (last_action_ == Action::rewound)
       search_->AppendTokens(next_tokens);
+
+    state_->prompt_gen_ = false;
     ComputeLogits(next_tokens);
   }
   if (guidance_logits_processor_) {
