@@ -77,7 +77,7 @@ if(ORT_HOME)
     set(ORT_LIB_DIR ${ORT_HOME}/lib)
   else()
     set(ORT_HEADER_DIR ${ORT_HOME}/include)
-    set(ORT_LIB_DIR ${ORT_HOME}/lib)
+    set(ORT_LIB_DIR ${ORT_HOME}/bin)
   endif()
 else()
   # If ORT_HOME is not specified, download the onnxruntime headers and libraries from the nightly feed
